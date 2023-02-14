@@ -118,7 +118,7 @@ jobs:
       - restore_cache:
           keys: [backend-build-deps]
       - run:
-          name: Back-end Scan
+          name: Backend Scan
           command: |
              cd backend
              npm i
