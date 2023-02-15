@@ -276,6 +276,7 @@ jobs:
           name: Deploy frontend objects
           command: |
            cd frontend
+           npm update
            npm run build
            aws s3 dist s3://fwd-udacity-${CIRCLE_WORKFLOW_ID:0:7} --recursive
 
