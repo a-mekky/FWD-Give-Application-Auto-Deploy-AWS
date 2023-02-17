@@ -12,6 +12,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupName: !Sub FWD-Udacity-${ID}
+      VpcId: vpc-0fe10b9d4ed4b0d11
       GroupDescription: Allow port 22 and port 3030.
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -29,7 +30,6 @@ Resources:
       InstanceType: t2.micro
       SecurityGroups:
         - Ref: InstanceSecurityGroup
-      SubnetId: subnet-0032e01119edd4fb1
       KeyName: Udacity 
       ImageId: ami-09cd747c78a9add63
       Tags:
