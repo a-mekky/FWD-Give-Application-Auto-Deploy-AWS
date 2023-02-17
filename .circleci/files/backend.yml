@@ -45,7 +45,16 @@ Resources:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
-  
+      
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  InternetGatewayVPCAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+      
   PublicRoute:
     Type: AWS::EC2::Route
     DependsOn: InternetGatewayVPCAttachment
