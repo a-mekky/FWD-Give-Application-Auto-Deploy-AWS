@@ -340,24 +340,24 @@ jobs:
                 --output text)
               
               export API_URL=http://${BACKEND_PUBLIC_IP}:3030
-              if curl -s $API_URL/api/status | grep "ok"
+
+              echo $API_URL
+
+              if curl $API_URL/api/status | grep "ok"
               then
-                echo $API_URL
                 exit 0
               else
-                echo $API_URL
                 exit 1
               fi
       - run:
           name: Frontend smoke test.
           command: |
             Frontend_WEBSITE=http://fwd-udacity-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
+            echo $Frontend_WEBSITE
             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
             then
-              echo $Frontend_WEBSITE
               exit 1
             else
-              echo $Frontend_WEBSITE
               exit 2
             fi
 
