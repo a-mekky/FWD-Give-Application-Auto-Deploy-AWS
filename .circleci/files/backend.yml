@@ -6,14 +6,12 @@ Parameters:
     Description: Unique identifier.
     Type: String
 
-  
-
 Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupName: !Sub FWD-Udacity-${ID}
-      VPC: 
+      VpcId:
         - !Ref: "vpc-02df50b25c57ceb67"
       GroupDescription: Allow port 22 and port 3030.
       SecurityGroupIngress:
@@ -32,7 +30,7 @@ Resources:
       InstanceType: t2.micro
       SecurityGroups:
         - Ref: InstanceSecurityGroup
-      KeyName: Udacity 
+      KeyName: Udacity
       ImageId: ami-09cd747c78a9add63
       Tags:
         - Key: Name
