@@ -5,14 +5,38 @@ Parameters:
   ID:
     Description: Unique identifier.
     Type: String
+    
+  VPCCIDR:
+    Description: CIDR Block of the VPC
+    Type: String
+    Default: 10.0.0.0/16
+
+  PublicSubnet1CIDR:
+    Description: CIDR Block of the first public subnet
+    Type: String
+    Default: 10.0.1.0/24
 
 Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VPCCIDR
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PublicSubnet1CIDR
+      MapPublicIpOnLaunch: true
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupName: !Sub FWD-Udacity-${ID}
-      VpcId:
-        - !Ref: "vpc-02df50b25c57ceb67"
+      VpcId: !Ref VPC
       GroupDescription: Allow port 22 and port 3030.
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -29,7 +53,7 @@ Resources:
     Properties:
       InstanceType: t2.micro
       SecurityGroups:
-        - Ref: InstanceSecurityGroup
+        !Ref InstanceSecurityGroup
       KeyName: Udacity
       ImageId: ami-09cd747c78a9add63
       Tags:
