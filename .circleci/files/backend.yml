@@ -53,7 +53,7 @@ Resources:
     Properties:
       InstanceType: t2.micro
       SecurityGroups:
-        - !GetAtt InstanceSecurityGroup.GroupId
+        - !Ref InstanceSecurityGroup
       KeyName: Udacity
       ImageId: ami-09cd747c78a9add63
       Tags:
