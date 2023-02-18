@@ -6,52 +6,14 @@ Parameters:
     Description: Unique identifier.
     Type: String
 
-  VPCCIDR:
-    Description: CIDR Block of the VPC
-    Type: String
-    Default: 10.0.0.0/16
-
-  PublicSubnet1CIDR:
-    Description: CIDR Block of the first public subnet
-    Type: String
-    Default: 10.0.1.0/24
-
+  
 
 Resources:
-  VPC:
-    Type: AWS::EC2::VPC
-    Properties:
-      CidrBlock: !Ref VPCCIDR
-      EnableDnsSupport: true
-      EnableDnsHostnames: true
-  
-  PublicSubnet1:
-    Type: AWS::EC2::Subnet
-    Properties:
-      VpcId: !Ref VPC
-      CidrBlock: !Ref PublicSubnet1CIDR
-      MapPublicIpOnLaunch: true
-      AvailabilityZone: !Select [0, !GetAZs ""]
-  
-  InternetGateway:
-    Type: AWS::EC2::InternetGateway
-
-  InternetGatewayVPCAttachment:
-    Type: AWS::EC2::VPCGatewayAttachment
-    Properties:
-      InternetGatewayId: !Ref InternetGateway
-      VpcId: !Ref VPC
-
-  PublicRouteTable:
-    Type: AWS::EC2::RouteTable
-    Properties:
-      VpcId: !Ref VPC
-
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      # GroupName: !Sub FWD-Udacity-${ID}
-      VpcId: !Sub VPC
+      GroupName: !Sub FWD-Udacity-${ID}
+      VPC: !Ref: "vpc-02df50b25c57ceb67"
       GroupDescription: Allow port 22 and port 3030.
       SecurityGroupIngress:
         - IpProtocol: tcp
