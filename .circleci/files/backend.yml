@@ -52,9 +52,10 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      SubnetId: !Ref PublicSubnet1
-      SecurityGroups:
-        - !Ref InstanceSecurityGroup
+      SubnetId:
+        - !Ref PublicSubnet1
+      SecurityGroupIds:
+        - !GetAtt ["InstanceSecurityGroup", "GroupId"]
       KeyName: Udacity
       ImageId: ami-09cd747c78a9add63
       Tags:
