@@ -174,6 +174,7 @@ jobs:
               --tags project=FWD-udacity \
               --stack-name "FWD-udacity-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
+              --region us-east-1
               
       - run:
           name: Ensure front-end infrastructure exist
@@ -183,6 +184,7 @@ jobs:
               --tags project=FWD-udacity \
               --stack-name "FWD-udacity-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
+              --region us-east-1
               
       - run:
           name: Add back-end ip to ansible inventory
@@ -350,7 +352,7 @@ jobs:
       - run:
           name: Frontend smoke test.
           command: |
-            FRONTEND_WEBSITE=http://fwd-udacity-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
+            FRONTEND_WEBSITE=http://fwd-udacity-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.us-east-1.amazonaws.com
             echo $AWS_DEFAULT_REGION
             echo $FRONTEND_WEBSITE
             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
