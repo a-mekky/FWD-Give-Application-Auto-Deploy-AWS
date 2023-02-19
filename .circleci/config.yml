@@ -350,8 +350,9 @@ jobs:
       - run:
           name: Frontend smoke test.
           command: |
-            Frontend_WEBSITE=http://fwd-udacity-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-${AWS_DEFAULT_REGION}.amazonaws.com
-            echo $Frontend_WEBSITE
+            FRONTEND_WEBSITE=http://fwd-udacity-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
+            echo $AWS_DEFAULT_REGION
+            echo $FRONTEND_WEBSITE
             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
             then
               exit 1
