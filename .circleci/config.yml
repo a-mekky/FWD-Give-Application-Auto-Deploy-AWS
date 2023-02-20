@@ -60,7 +60,7 @@ commands:
               SUCCESS=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
               if(( $SUCCESS==1 )); 
               then
-                cd ~/project/backend
+                cd ~/backend
                 npm install
                 npm run migrations:revert
               fi
@@ -237,7 +237,7 @@ jobs:
       - run:
           name: Send migration results to memstash
           command: |
-            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+            if grep -q "has been executed successfully." ~/backend/migrations_dump.txt
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
             fi
@@ -353,7 +353,6 @@ jobs:
           name: Frontend smoke test.
           command: |
             FRONTEND_WEBSITE=http://fwd-udacity-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.us-east-1.amazonaws.com
-            echo $AWS_DEFAULT_REGION
             echo $FRONTEND_WEBSITE
             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
             then
