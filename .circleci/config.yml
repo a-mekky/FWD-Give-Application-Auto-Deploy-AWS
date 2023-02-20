@@ -58,7 +58,7 @@ commands:
           when: on_fail
           command: |
             SUCCESS=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
-            if (( $SUCCESS == 1 )); 
+            if $SUCCESS == 1 
             then
               cd ~/backend
               npm install
@@ -142,7 +142,7 @@ jobs:
             npm i
             npm audit fix --force --audit-level=critical
             npm audit fix --force --audit-level=critical
-            npm audit fix --force
+            npm audit fix
             npm audit --audit-level=critical
 
   scan-backend:
@@ -159,7 +159,7 @@ jobs:
             npm i
             npm audit fix --force --audit-level=critical
             npm audit fix --force --audit-level=critical
-            npm audit fix --force
+            npm audit fix
             npm audit --audit-level=critical
 
   deploy-infrastructure:
