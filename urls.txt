@@ -2,15 +2,15 @@ Github [URL01]:
 https://github.com/a-mekky/FWD-Give-Application-Auto-Deploy-AWS
 
 S3 Bucket [URL02]:
-http://fwd-udacity-1027b9e.s3-website-us-east-1.amazonaws.com
+http://fwd-udacity-116877c.s3-website-us-east-1.amazonaws.com
 
 CloudFront [URL03]:
-http://d1gfgpxsjflf72.cloudfront.net
+http://d8znf6jd4gw01.cloudfront.net
 
 Backend Instance [URL04]:
-ec2-54-86-32-120.compute-1.amazonaws.com
-54.86.32.120
+ec2-3-80-10-155.compute-1.amazonaws.com
+3.80.10.155
 
 Prometheus Server [URL05]:
-ec2-52-91-206-37.compute-1.amazonaws.com
-52.91.206.37
+ec2-35-172-118-49.compute-1.amazonaws.com
+35.172.118.49:9090
